@@ -1,0 +1,81 @@
+import type { Deadline, Milestone } from "@/types";
+
+export const DEMO_DEADLINE: Deadline = {
+  id: "dl-handshake-2026",
+  title: "Submit Handshake Challenge",
+  headline: "Handshake Challenge is coming up!",
+  targetDateISO: "2026-11-23T23:59:00",
+  timezone: "America/Los_Angeles",
+  category: "Launch",
+  questionnaire: {
+    doneLooksLike: "Shipped web app + crisp exported PNGs",
+    hoursPerDay: 3,
+    fixedDates: "Nov 20 design freeze, Nov 22 final QA",
+  },
+};
+
+export const DEMO_MILESTONES: Milestone[] = [
+  {
+    id: "ms-demo-1",
+    offsetDays: 10,
+    computedDateISO: "2026-11-13",
+    formattedDate: "Nov 13",
+    action: "Scope the challenge brief",
+    icon: "Compass",
+    checked: true,
+  },
+  {
+    id: "ms-demo-2",
+    offsetDays: 7,
+    computedDateISO: "2026-11-16",
+    formattedDate: "Nov 16",
+    action: "Plan in Gemini",
+    icon: "Sparkles",
+    checked: false,
+  },
+  {
+    id: "ms-demo-3",
+    offsetDays: 5,
+    computedDateISO: "2026-11-18",
+    formattedDate: "Nov 18",
+    action: "Build the app",
+    icon: "Code2",
+    checked: false,
+  },
+  {
+    id: "ms-demo-4",
+    offsetDays: 3,
+    computedDateISO: "2026-11-20",
+    formattedDate: "Nov 20",
+    action: "Polish the design",
+    icon: "Palette",
+    checked: false,
+  },
+  {
+    id: "ms-demo-5",
+    offsetDays: 2,
+    computedDateISO: "2026-11-21",
+    formattedDate: "Nov 21",
+    action: "Export and test",
+    icon: "ImageDown",
+    checked: false,
+  },
+  {
+    id: "ms-demo-6",
+    offsetDays: 1,
+    computedDateISO: "2026-11-22",
+    formattedDate: "Nov 22",
+    action: "Set reminders",
+    icon: "BellRing",
+    checked: false,
+  },
+  {
+    id: "ms-demo-7",
+    offsetDays: 0,
+    computedDateISO: "2026-11-23",
+    formattedDate: "Nov 23",
+    action: "Submit on Handshake",
+    icon: "Rocket",
+    checked: false,
+  },
+];
