@@ -4,11 +4,6 @@
 
 :root {
   --radius: 0.75rem;
-  --font-sans: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-display: "Fraunces", "Georgia", "Cambria", "Times New Roman", serif;
-  --font-script: "Caveat", "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
-  --font-script-elegant: "Great Vibes", "Segoe Script", "Snell Roundhand", "Brush Script MT", cursive;
-  --font-mono: "JetBrains Mono", "Cascadia Mono", "Consolas", ui-monospace, monospace;
 }
 
 * {

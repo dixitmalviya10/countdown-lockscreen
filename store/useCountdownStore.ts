@@ -391,11 +391,37 @@ export const useCountdownStore = create<CountdownStoreState>()(
     }),
     {
       name: "t-minus-studio-v1",
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => ({
+        getItem: (name) => {
+          try {
+            return localStorage.getItem(name);
+          } catch {
+            return null;
+          }
+        },
+        setItem: (name, value) => {
+          try {
+            localStorage.setItem(name, value);
+          } catch {
+            // Ignore storage quota or restricted-mode errors cleanly
+          }
+        },
+        removeItem: (name) => {
+          try {
+            localStorage.removeItem(name);
+          } catch {
+            // Ignore restricted-mode errors
+          }
+        },
+      })),
       partialize: (state) => ({
         deadline: state.deadline,
         milestones: state.milestones,
-        theme: state.theme,
+        theme: {
+          ...state.theme,
+          // Keep large uploaded DataURLs in memory only so localStorage never overflows
+          customBgImage: null,
+        },
         devicePresetId: state.devicePresetId,
         previewMode: state.previewMode,
         reminderConfig: state.reminderConfig,

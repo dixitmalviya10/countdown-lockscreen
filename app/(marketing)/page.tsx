@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -28,12 +28,38 @@ const HERO_PRESETS: ThemePresetId[] = [
 
 export default function MarketingPage() {
   const [presetIdx, setPresetIdx] = useState(0);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [frameScale, setFrameScale] = useState<number | null>(null);
 
   useEffect(() => {
     const id = setInterval(() => {
       setPresetIdx((prev) => (prev + 1) % HERO_PRESETS.length);
     }, 4500);
     return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+
+    const updateScale = () => {
+      // Use layout dimensions rather than getBoundingClientRect() so the
+      // parent motion.div's initial scale(0.96) transform doesn't shrink the scale.
+      const width = el.clientWidth;
+      const height = el.clientHeight;
+      if (width > 0 && height > 0) {
+        setFrameScale(Math.max(width / 393, height / 852));
+      }
+    };
+
+    updateScale();
+    const ro = new ResizeObserver(updateScale);
+    ro.observe(el);
+    window.addEventListener("resize", updateScale);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateScale);
+    };
   }, []);
 
   const activePresetId = HERO_PRESETS[presetIdx];
@@ -161,32 +187,21 @@ export default function MarketingPage() {
               <div className="pointer-events-none absolute -inset-8 rounded-full bg-gradient-to-tr from-amber-500/20 via-orange-500/10 to-cyan-500/15 blur-3xl" />
 
               {/* Scaled 393x852 iPhone Frame */}
-              <div className="relative h-[614px] w-[283px] overflow-hidden rounded-[42px] border border-white/20 bg-black shadow-[0_40px_100px_-18px_rgba(0,0,0,0.9)] sm:h-[665px] sm:w-[307px]">
+              <div
+                ref={frameRef}
+                className="relative aspect-[393/852] w-[283px] max-w-full overflow-hidden rounded-[42px] bg-black shadow-[0_40px_100px_-18px_rgba(0,0,0,0.9)] ring-1 ring-white/20 sm:w-[307px]"
+              >
                 <div
-                  style={{
-                    width: 393,
-                    height: 852,
-                    transform: "scale(0.72)",
-                    transformOrigin: "top left",
-                  }}
-                  className="hidden sm:block"
-                >
-                  <LockScreenCanvas
-                    deadline={DEMO_DEADLINE}
-                    milestones={DEMO_MILESTONES}
-                    theme={activeTheme}
-                    preset={DEVICE_PRESETS["iphone-16-pro"]}
-                    mode="mockup"
-                  />
-                </div>
-                <div
-                  style={{
-                    width: 393,
-                    height: 852,
-                    transform: "scale(0.72)",
-                    transformOrigin: "top left",
-                  }}
-                  className="sm:hidden"
+                  style={
+                    frameScale !== null
+                      ? { transform: `scale(${frameScale})` }
+                      : undefined
+                  }
+                  className={`h-[852px] w-[393px] origin-top-left ${
+                    frameScale === null
+                      ? "scale-[0.7207] sm:scale-[0.7812]"
+                      : ""
+                  }`}
                 >
                   <LockScreenCanvas
                     deadline={DEMO_DEADLINE}

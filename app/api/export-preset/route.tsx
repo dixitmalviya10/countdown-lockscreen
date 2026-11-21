@@ -71,7 +71,7 @@ export async function GET(req: Request) {
                 opacity: 0.92,
               }}
             >
-              <span>9:41</span>
+              <div style={{ display: "flex", flex: 1 }}>9:41</div>
               <div
                 style={{
                   width: `${px(220)}px`,
@@ -82,7 +82,15 @@ export async function GET(req: Request) {
                   display: "flex",
                 }}
               />
-              <span>5G  100%</span>
+              <div
+                style={{
+                  display: "flex",
+                  flex: 1,
+                  justifyContent: "flex-end",
+                }}
+              >
+                5G  100%
+              </div>
             </div>
 
             {/* Date, Weather & Big Lock Clock */}

@@ -12,7 +12,7 @@
 - **Hero Lock Screen Renderer**:
   - **Device Presets**: iPhone (`1179×2556`), Android (`1080×2400`), Desktop FHD (`1920×1080` horizontal), Desktop QHD (`2560×1440` horizontal).
   - **2 Modes**: `Mockup` (with OS status bar, clock, date/weather, and lock-screen shortcuts) and `Wallpaper` (clean safe zones for your real device).
-  - **Toggleable Safe-Zone Overlay**: Visualizes top clock (~32%), center frosted card (~34–86%), and bottom shortcuts (~12%).
+  - **Toggleable Safe-Zone Overlay**: Visualizes top clock (~32%), center frosted card (32%–88%), and bottom shortcuts (~12%) on portrait, plus 48%/52% clear-space split on landscape.
   - **Live Milestones**: `"TODAY"` badge on today's milestone, dimmed past unchecked items, progress ring, and a celebratory completion state.
 - **6 Procedural Bokeh Themes + Custom Art**: Autumn Bokeh, Midnight Neon, Clean Mono, Sunrise Gradient, Study Focus, and Spring Pastel—plus custom background image upload with blur/dim sliders, client-side dominant palette extraction, and live **WCAG AA contrast guard**.
 - **Calendar Reminders & Share**: Client-side RFC 5545 `.ics` bundle (with `VALARM` and optional daily `RRULE`), Google Calendar deep links, optional browser alert check-in, and compact `lz-string` `/s/[hash]` URLs with `next/og` OpenGraph cards.
