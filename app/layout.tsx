@@ -1,53 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Caveat,
-  Fraunces,
-  Great_Vibes,
-  Inter,
-  JetBrains_Mono,
-} from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-script",
-  display: "swap",
-});
-
-const greatVibes = Great_Vibes({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-script-elegant",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-mono",
-  display: "swap",
-});
+const GOOGLE_FONTS_HREF =
+  "https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap";
 
 function resolveMetadataBase(): URL {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
   if (explicit) {
     return new URL(
       explicit.startsWith("http") ? explicit : `https://${explicit}`
+    );
+  }
+  const netlifyUrl = process.env.URL || process.env.DEPLOY_PRIME_URL;
+  if (netlifyUrl) {
+    return new URL(
+      netlifyUrl.startsWith("http") ? netlifyUrl : `https://${netlifyUrl}`
     );
   }
   const vercelHost =
@@ -99,11 +66,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`dark ${inter.variable} ${fraunces.variable} ${caveat.variable} ${greatVibes.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="stylesheet"
+          href={GOOGLE_FONTS_HREF}
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen bg-studio-bg font-sans text-zinc-100 antialiased selection:bg-amber-500/30 selection:text-amber-100">
         {children}
       </body>
