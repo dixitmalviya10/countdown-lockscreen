@@ -536,7 +536,7 @@ export const LockScreenCanvas = React.forwardRef<
           /* LANDSCAPE LAYOUT (Desktop 16:9 Wallpapers: Clear Space Left, Card Right) */
           <div className="relative z-10 flex h-full w-full items-center justify-between py-8">
             {/* Left Side: Clear desktop icon space / Mockup Desktop Clock */}
-            <div className="flex h-full w-[46%] flex-col justify-between px-10 py-2">
+            <div className="flex h-full w-[48%] flex-col justify-between px-10 py-2">
               {mode === "mockup" ? (
                 <div>
                   <div className="flex items-center gap-2 text-sm font-medium opacity-85">
@@ -786,9 +786,9 @@ export const LockScreenCanvas = React.forwardRef<
                     SAFE ZONE: OS CLOCK & WIDGETS (~32%)
                   </span>
                 </div>
-                <div className="absolute inset-x-0 top-[34%] flex h-[52%] items-start justify-end border-y border-dashed border-amber-400/60 bg-amber-500/5 p-2">
+                <div className="absolute inset-x-0 top-[32%] flex h-[56%] items-start justify-end bg-amber-500/5 p-2">
                   <span className="rounded bg-amber-950/90 px-2 py-0.5 font-mono text-[10px] font-semibold text-amber-200">
-                    CARD ZONE (34%–86%)
+                    CARD ZONE (32%–88%)
                   </span>
                 </div>
                 <div className="absolute inset-x-0 bottom-0 flex h-[12%] items-center justify-center border-t-2 border-dashed border-rose-400/70 bg-rose-500/10">
@@ -799,12 +799,12 @@ export const LockScreenCanvas = React.forwardRef<
               </>
             ) : (
               <>
-                <div className="absolute inset-y-0 left-0 flex w-[46%] items-start justify-start border-r-2 border-dashed border-cyan-400/70 bg-cyan-500/10 p-4">
+                <div className="absolute inset-y-0 left-0 flex w-[48%] items-start justify-start border-r-2 border-dashed border-cyan-400/70 bg-cyan-500/10 p-4">
                   <span className="rounded bg-cyan-950/90 px-2 py-0.5 font-mono text-[10px] font-semibold text-cyan-200">
                     CLEAR SPACE: DESKTOP ICONS & WIDGETS
                   </span>
                 </div>
-                <div className="absolute inset-y-0 right-0 flex w-[52%] items-start justify-end border-l border-dashed border-amber-400/60 bg-amber-500/5 p-4">
+                <div className="absolute inset-y-0 right-0 flex w-[52%] items-start justify-end bg-amber-500/5 p-4">
                   <span className="rounded bg-amber-950/90 px-2 py-0.5 font-mono text-[10px] font-semibold text-amber-200">
                     COUNTDOWN CARD ZONE
                   </span>

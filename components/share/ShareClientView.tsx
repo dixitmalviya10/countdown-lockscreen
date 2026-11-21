@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   CalendarPlus,
@@ -32,12 +32,40 @@ function ShareInner({ shared }: { shared: SharedCountdownState }) {
     (s) => s.hydrateFromShareState
   );
   const exportRef = useRef<HTMLDivElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
   const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
   const preset =
     DEVICE_PRESETS[shared.devicePresetId] ?? DEVICE_PRESETS["iphone-16-pro"];
+  const isPortrait = preset.orientation === "portrait";
+  const [previewScale, setPreviewScale] = useState(isPortrait ? 0.72 : 0.45);
+
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+
+    const updateScale = () => {
+      const availW = Math.max(220, el.clientWidth - 8);
+      const availH = isPortrait ? 640 : 440;
+      const nextScale = Math.min(
+        availW / preset.logicalWidth,
+        availH / preset.logicalHeight,
+        1
+      );
+      setPreviewScale(Math.max(0.24, nextScale));
+    };
+
+    updateScale();
+    const ro = new ResizeObserver(updateScale);
+    ro.observe(el);
+    window.addEventListener("resize", updateScale);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", updateScale);
+    };
+  }, [isPortrait, preset.logicalHeight, preset.logicalWidth]);
   const daysLeft = getDaysRemaining(
     shared.deadline.targetDateISO,
     shared.deadline.timezone
@@ -85,8 +113,6 @@ function ShareInner({ shared }: { shared: SharedCountdownState }) {
     hydrateFromShareState(shared);
     router.push("/builder");
   };
-
-  const previewScale = preset.orientation === "portrait" ? 0.72 : 0.48;
 
   return (
     <div className="min-h-screen bg-studio-bg text-zinc-100">
@@ -166,13 +192,18 @@ function ShareInner({ shared }: { shared: SharedCountdownState }) {
         </div>
 
         {/* Right: Rendered Lock Screen */}
-        <div className="flex items-center justify-center lg:col-span-6">
+        <div
+          ref={stageRef}
+          className="flex w-full items-center justify-center overflow-hidden lg:col-span-6"
+        >
           <div
             style={{
               width: preset.logicalWidth * previewScale,
               height: preset.logicalHeight * previewScale,
             }}
-            className="relative overflow-hidden rounded-[36px] border border-white/20 shadow-2xl"
+            className={`relative overflow-hidden shadow-2xl ring-1 ring-white/20 ${
+              isPortrait ? "rounded-[36px]" : "rounded-2xl"
+            }`}
           >
             <div
               style={{
@@ -181,6 +212,7 @@ function ShareInner({ shared }: { shared: SharedCountdownState }) {
                 transform: `scale(${previewScale})`,
                 transformOrigin: "top left",
               }}
+              className="absolute left-0 top-0"
             >
               <LockScreenCanvas
                 deadline={shared.deadline}

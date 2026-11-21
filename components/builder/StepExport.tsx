@@ -87,16 +87,6 @@ export function StepExport({
         height: res.height,
         presetName: preset.name,
       });
-      fetch("/api/save-export", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          presetId: preset.id,
-          dataUrl: res.dataUrl,
-          width: res.width,
-          height: res.height,
-        }),
-      }).catch(() => {});
       toast({
         title: `Exported ${preset.name}`,
         description: `${res.width}×${res.height}px PNG downloaded.`,

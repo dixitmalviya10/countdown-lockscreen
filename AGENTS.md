@@ -11,7 +11,7 @@ T-Minus Studio is a Next.js 14 (App Router) + TypeScript + Tailwind CSS applicat
 - **Framework**: Next.js `14.2.25` (App Router, React 18, TypeScript strict mode)
 - **Styling**: Tailwind CSS `3.4.x` (`tailwind.config.ts`, `app/globals.css`)
 - **State**: Zustand `5.x` with `localStorage` persistence (`store/useCountdownStore.ts`)
-- **Validation**: Zod (`app/api/plan/route.ts`, `app/api/save-export/route.ts`)
+- **Validation**: Zod (`app/api/plan/route.ts`, `lib/share.ts`)
 - **Dates/Timezones**: `date-fns` and `date-fns-tz` (`lib/planner.ts`, `lib/ics.ts`)
 - **Export & Share**: `html-to-image` (`lib/export.ts`), `lz-string` (`lib/share.ts`)
 - **Testing**: Vitest (`vitest.config.ts`, `lib/__tests__/*.test.ts`)
@@ -24,7 +24,6 @@ T-Minus Studio is a Next.js 14 (App Router) + TypeScript + Tailwind CSS applicat
 - `app/api/plan/route.ts` — `POST /api/plan` AI planner using `GEMINI_API_KEY` with deterministic fallback.
 - `app/api/og/route.tsx` — Edge OpenGraph image generator for shared links.
 - `app/api/export-preset/route.tsx` — Server-side PNG export route.
-- `app/api/save-export/route.ts` — Local export saving endpoint.
 - `components/lockscreen/LockScreenCanvas.tsx` — Core portrait/landscape lock-screen renderer (safe zones, frosted card, progress ring, milestone rows, custom background + procedural bokeh).
 - `components/lockscreen/PreviewStage.tsx` — Responsive `ResizeObserver`-scaled preview stage and hidden full-resolution export target.
 - `components/lockscreen/ThemedArtwork.tsx` — Category/theme-specific bottom vector illustrations.
