@@ -534,9 +534,9 @@ export const LockScreenCanvas = React.forwardRef<
           </div>
         ) : (
           /* LANDSCAPE LAYOUT (Desktop 16:9 Wallpapers: Clear Space Left, Card Right) */
-          <div className="relative z-10 flex h-full w-full items-center justify-between px-10 py-8">
+          <div className="relative z-10 flex h-full w-full items-center justify-between py-8">
             {/* Left Side: Clear desktop icon space / Mockup Desktop Clock */}
-            <div className="flex h-full w-[44%] flex-col justify-between py-2">
+            <div className="flex h-full w-[46%] flex-col justify-between px-10 py-2">
               {mode === "mockup" ? (
                 <div>
                   <div className="flex items-center gap-2 text-sm font-medium opacity-85">
@@ -569,7 +569,7 @@ export const LockScreenCanvas = React.forwardRef<
             </div>
 
             {/* Right Side: T-Minus Frosted Glass Card */}
-            <div className="flex h-full w-[52%] items-center justify-end">
+            <div className="flex h-full w-[52%] items-center justify-center px-6">
               <div
                 style={{
                   background: cardBackground,

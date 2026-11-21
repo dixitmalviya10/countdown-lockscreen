@@ -241,13 +241,13 @@ export function StepMilestones() {
             >
               <div className="flex items-start gap-2.5">
                 {/* Drag Handle + Keyboard Up/Down */}
-                <div className="flex flex-col items-center gap-0.5 pt-1 text-zinc-500">
+                <div className="flex flex-col items-center gap-2 text-zinc-500">
                   <button
                     type="button"
                     aria-label="Move milestone up"
                     onClick={() => moveRow(idx, -1)}
                     disabled={idx === 0}
-                    className="rounded p-0.5 hover:bg-white/10 hover:text-zinc-200 disabled:opacity-25"
+                    className="rounded p-1 hover:bg-white/10 hover:text-zinc-200 disabled:opacity-25"
                   >
                     <ArrowUp className="h-3 w-3" />
                   </button>
@@ -257,7 +257,7 @@ export function StepMilestones() {
                     aria-label="Move milestone down"
                     onClick={() => moveRow(idx, 1)}
                     disabled={idx === milestones.length - 1}
-                    className="rounded p-0.5 hover:bg-white/10 hover:text-zinc-200 disabled:opacity-25"
+                    className="rounded p-1 hover:bg-white/10 hover:text-zinc-200 disabled:opacity-25"
                   >
                     <ArrowDown className="h-3 w-3" />
                   </button>
